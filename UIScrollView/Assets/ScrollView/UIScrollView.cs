@@ -137,6 +137,11 @@ namespace UnityEngine.UI
             return tmpList;
         }
        
+        public void ScrollTo(float verticalNormalizedPosition,float horizontalNormalizedPosition)
+        {
+            m_ScrollRect.verticalNormalizedPosition = verticalNormalizedPosition;//初始化scroll的位置
+            m_ScrollRect.horizontalNormalizedPosition = horizontalNormalizedPosition;
+        }
         public void UpdateScrollView<T>(IList datas, GameObject prefab, ScrollViewRefreshCallBack callback = null) where T:MonoBehaviour
         {
             onRefreshCallBack = callback;
@@ -145,7 +150,8 @@ namespace UnityEngine.UI
                 Debug.LogError("参数错误");
                 return;
             }
-            _datas = datas;
+            ScrollTo(1, 0);
+             _datas = datas;
             CellWidth = prefab.GetComponent<RectTransform>().rect.width;
             CellHeight = prefab.GetComponent<RectTransform>().rect.height;
             //             m_ItemPrefab  = GameObject.Instantiate(prefab) as GameObject;
